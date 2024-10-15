@@ -2,6 +2,7 @@
 
 require_relative "hexlet_code/version"
 
+# building form utility
 module HexletCode
   class Error < StandardError; end
 

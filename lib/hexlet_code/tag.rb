@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module HexletCode
+  # building tags
   module Tag
     SINGLE_TAGS = %w[area base br col embed hr img input link meta param source track wbr].to_set
 
@@ -17,7 +18,7 @@ module HexletCode
       private
 
       def build_attrs_string(attrs)
-        attrs.to_a.map { |key, value| " #{key}=\"#{value}\"" }.join("")
+        attrs.to_a.map { |key, value| " #{key}=\"#{value}\"" }.join
       end
 
       def build_single_tag(name, attrs = {})

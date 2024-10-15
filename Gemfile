@@ -13,6 +13,8 @@ gem "minitest-power_assert"
 
 gem "rubocop", "~> 1.21"
 
+gem "rubocop-minitest"
+
 group :test do
   gem "simplecov"
 end

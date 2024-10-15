@@ -1,5 +1,9 @@
+require:
+  - rubocop-minitest
+
 AllCops:
   TargetRubyVersion: 3.2
+  NewCops: enable
 
 Style/StringLiterals:
   Enabled: true
