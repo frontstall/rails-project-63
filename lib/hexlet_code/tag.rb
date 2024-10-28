@@ -8,6 +8,7 @@ module HexletCode
     class << self
       def build(name, attrs = {})
         if SINGLE_TAGS.include?(name.downcase)
+          attrs[:value] ||= yield if block_given?
           build_single_tag(name, attrs)
         else
           content = block_given? ? yield : ""

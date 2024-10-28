@@ -7,14 +7,13 @@ module HexletCode
   class Error < StandardError; end
 
   HexletCode.autoload :Tag, "./lib/hexlet_code/tag"
+  HexletCode.autoload :Form, "./lib/hexlet_code/form"
 
   class << self
-    def form_for(_entity, attrs = {})
-      action = attrs[:url]
-      action ||= "#"
-      method = attrs[:method]
-      method ||= "post"
-      self::Tag.build "form", action:, method:
+    def form_for(model, attrs = {})
+      form = Form.new model, attrs
+      yield form if block_given?
+      form.to_s
     end
   end
 end

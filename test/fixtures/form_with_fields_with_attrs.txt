@@ -1,0 +1,1 @@
+<form action="#" method="post"><input class="user-input" name="name" type="text" value="Vasyan"><input name="job" type="text" value="Hexlet"></form>
