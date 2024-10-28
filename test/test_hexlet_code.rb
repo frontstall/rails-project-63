@@ -50,6 +50,7 @@ class TestHexletCode < Minitest::Test
     form = HexletCode.form_for user do |f|
       f.input :name, class: "user-input"
       f.input :job
+      f.submit "Custom submit text"
     end
 
     assert { form == expected }
@@ -62,6 +63,7 @@ class TestHexletCode < Minitest::Test
 
     form = HexletCode.form_for user, url: "#" do |f|
       f.input :job, as: :text, rows: 50, cols: 50
+      f.submit
     end
 
     assert { form == expected }

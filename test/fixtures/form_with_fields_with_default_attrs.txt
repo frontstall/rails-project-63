@@ -1,1 +1,1 @@
-<form action="#" method="post"><textarea rows="50" cols="50" name="job">Hexlet</textarea></form>
+<form action="#" method="post"><label for="job">Job</label><textarea cols="50" id="job" name="job" rows="50">Hexlet</textarea><input type="submit" value="Save"></form>
