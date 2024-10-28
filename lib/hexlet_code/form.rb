@@ -5,8 +5,8 @@ class Form
   def initialize(model, attrs)
     @model = model
     @attrs = attrs.except :url
-    @attrs[:action] = attrs[:url] || "#"
-    @attrs[:method] ||= "post"
+    @attrs[:action] = attrs[:url] || '#'
+    @attrs[:method] ||= 'post'
     @content = []
   end
 
@@ -19,13 +19,13 @@ class Form
     @content.concat tags
   end
 
-  def submit(text = "Save")
-    submit_btn = Tag.new "input", type: "submit", value: text
+  def submit(text = 'Save')
+    submit_btn = Tag.new 'input', type: 'submit', value: text
     @content << submit_btn
   end
 
   def to_html
-    form = Tag.new "form", @attrs do
+    form = Tag.new 'form', @attrs do
       @content
     end
 
@@ -41,7 +41,7 @@ class Form
     when :textinput
       textinput value, attrs
     else
-      raise "Unknown method name"
+      raise 'Unknown method name'
     end
   end
 
@@ -51,7 +51,7 @@ class Form
 
     [
       label(attrs[:id], attrs[:name]),
-      Tag.new("textarea", attrs) do
+      Tag.new('textarea', attrs) do
         value
       end
     ]
@@ -60,12 +60,12 @@ class Form
   def textinput(value, attrs)
     [
       label(attrs[:id], attrs[:name]),
-      Tag.new("input", attrs.merge(type: "text", value:))
+      Tag.new('input', attrs.merge(type: 'text', value:))
     ]
   end
 
   def label(id, text)
-    Tag.new "label", for: id do
+    Tag.new 'label', for: id do
       text.capitalize
     end
   end

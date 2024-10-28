@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-autoload :Html, "hexlet_code/html"
+autoload :Html, 'hexlet_code/html'
 
 # represents html tag
 class Tag

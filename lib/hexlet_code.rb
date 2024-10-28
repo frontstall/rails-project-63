@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative "hexlet_code/version"
-autoload :Tag, "hexlet_code/tag"
-autoload :Form, "hexlet_code/form"
+require_relative 'hexlet_code/version'
+autoload :Tag, 'hexlet_code/tag'
+autoload :Form, 'hexlet_code/form'
 
 # building form utility
 module HexletCode

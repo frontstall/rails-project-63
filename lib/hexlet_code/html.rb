@@ -15,7 +15,7 @@ module Html
   private
 
   def build_children
-    return "" if @children.nil?
+    return '' if @children.nil?
 
     return @children.to_s unless @children.instance_of? Array
 
