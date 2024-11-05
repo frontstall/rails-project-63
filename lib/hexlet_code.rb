@@ -1,18 +1,17 @@
 # frozen_string_literal: true
 
 require_relative 'hexlet_code/version'
-autoload :Tag, 'hexlet_code/tag'
-autoload :Form, 'hexlet_code/form'
 
 # building form utility
 module HexletCode
-  class Error < StandardError; end
+  HexletCode.autoload :Form, 'hexlet_code/form'
+  HexletCode.autoload :Renders, 'hexlet_code/renders/html'
 
   class << self
     def form_for(model, attrs = {})
-      form = Form.new model, attrs
+      form = HexletCode::Form.new model, attrs
       yield form if block_given?
-      form.to_html
+      HexletCode::Renders::Html.new.render form
     end
   end
 end

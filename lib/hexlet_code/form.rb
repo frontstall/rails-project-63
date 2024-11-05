@@ -1,72 +1,47 @@
 # frozen_string_literal: true
 
-# creating forms from data
-class Form
-  def initialize(model, attrs)
-    @model = model
-    @attrs = attrs.except :url
-    @attrs[:action] = attrs[:url] || '#'
-    @attrs[:method] ||= 'post'
-    @content = []
-  end
+module HexletCode
+  # creating forms from data
+  class Form
+    attr_accessor :attrs, :content
 
-  def input(name, attrs = {})
-    rest_attrs = attrs.except :as
-    rest_attrs[:name] = name
-    rest_attrs[:id] ||= name
-
-    tags = create_tags attrs[:as] || :textinput, @model.send(name), rest_attrs
-    @content.concat tags
-  end
-
-  def submit(text = 'Save')
-    submit_btn = Tag.new 'input', type: 'submit', value: text
-    @content << submit_btn
-  end
-
-  def to_html
-    form = Tag.new 'form', @attrs do
-      @content
+    def initialize(model, attrs)
+      @model = model
+      @attrs = attrs.except :url
+      @attrs[:action] = attrs.fetch(:url, '#')
+      @attrs[:method] ||= 'post'
+      @content = []
     end
 
-    form.to_html
-  end
+    def input(name, attrs = {})
+      rest_attrs = attrs.except :as
 
-  private
+      as = attrs.fetch(:as, :textinput)
+      value = @model.public_send name
+      rest_attrs[:value] = value
+      rest_attrs[:name] = name
+      rest_attrs[:id] ||= name
 
-  def create_tags(name, value, attrs)
-    case name
-    when :text
-      textarea value, attrs
-    when :textinput
-      textinput value, attrs
-    else
-      raise 'Unknown method name'
+      field = public_send(as, rest_attrs)
+
+      @content << field
     end
-  end
 
-  def textarea(value, attrs)
-    attrs[:cols] ||= 20
-    attrs[:rows] ||= 40
+    def text(attrs)
+      default_attrs = { cols: 20, rows: 40 }
+      textarea_attrs = default_attrs.merge attrs
+      { name: :textarea, attrs: textarea_attrs }
+    end
 
-    [
-      label(attrs[:id], attrs[:name]),
-      Tag.new('textarea', attrs) do
-        value
-      end
-    ]
-  end
+    def textinput(attrs)
+      { name: :textinput, attrs: }
+    end
 
-  def textinput(value, attrs)
-    [
-      label(attrs[:id], attrs[:name]),
-      Tag.new('input', attrs.merge(type: 'text', value:))
-    ]
-  end
+    def submit(text = 'Save', attrs = {})
+      attrs[:type] = 'submit'
+      attrs[:value] = text
 
-  def label(id, text)
-    Tag.new 'label', for: id do
-      text.capitalize
+      @content << { name: :submit, attrs: }
     end
   end
 end
