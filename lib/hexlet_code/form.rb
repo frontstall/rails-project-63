@@ -20,7 +20,6 @@ module HexletCode
       value = @model.public_send name
       rest_attrs[:value] = value
       rest_attrs[:name] = name
-      rest_attrs[:id] ||= name
 
       field = public_send(as, rest_attrs)
 
@@ -28,9 +27,7 @@ module HexletCode
     end
 
     def text(attrs)
-      default_attrs = { cols: 20, rows: 40 }
-      textarea_attrs = default_attrs.merge attrs
-      { name: :textarea, attrs: textarea_attrs }
+      { name: :textarea, attrs: }
     end
 
     def textinput(attrs)
